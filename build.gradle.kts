@@ -3,8 +3,18 @@ plugins {
     kotlin("jvm") version "1.4.31"
 }
 
+val baseVersion = "1.0"
+
+val ref = providers.environmentVariable("GITHUB_REF").forUseAtConfigurationTime()
+
+version = if (ref.isPresent) {
+    val tagVersion = ref.get().replace("refs/tags/", "")
+    "$tagVersion-SNAPSHOT"
+} else {
+    baseVersion
+}
+
 group = "de.kolpa.mc"
-version = "1.0-SNAPSHOT"
 
 repositories {
     jcenter()
@@ -18,6 +28,7 @@ tasks {
     compileKotlin {
         kotlinOptions {
             jvmTarget = "1.8"
+            useIR = true
         }
     }
 }
