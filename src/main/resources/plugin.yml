@@ -1,7 +1,7 @@
 name: SleepManager
 version: ${version}
 main: de.kolpa.mc.sleepmanager.SleepManager
-api-version: 1.16
+api-version: 1.17
 prefix: SleepManager
 authors: [ Kolpa ]
 description: Allows players to sleep in bed without all players sleeping
