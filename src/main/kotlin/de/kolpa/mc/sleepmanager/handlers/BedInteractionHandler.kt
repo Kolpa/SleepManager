@@ -1,6 +1,8 @@
-package de.kolpa.mc.sleepmanager
+package de.kolpa.mc.sleepmanager.handlers
 
 import de.kolpa.mc.sleepmanager.util.scheduleSyncDelayed
+import de.kolpa.mc.sleepmanager.util.toTextComponent
+import org.bukkit.Server.BROADCAST_CHANNEL_USERS
 import org.bukkit.World
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -24,7 +26,7 @@ class BedInteractionHandler(
 
         logger.info("Scheduling time set task for $BED_ENTER_TIME_SET_DELAY ticks in the future")
 
-        plugin.server.broadcastMessage("${event.player.name} went to bed")
+        plugin.server.broadcast("${event.player.name} went to bed".toTextComponent(), BROADCAST_CHANNEL_USERS)
 
         plugin.scheduleSyncDelayed(BED_ENTER_TIME_SET_DELAY) {
             setTime(event.bed.world)

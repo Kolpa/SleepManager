@@ -1,6 +1,6 @@
 plugins {
-    id("com.github.johnrengelman.shadow") version "6.1.0"
-    kotlin("jvm") version "1.4.31"
+    id("com.github.johnrengelman.shadow") version "7.0.0"
+    kotlin("jvm") version "1.5.20"
 }
 
 val baseVersion = "1.0"
@@ -8,8 +8,7 @@ val baseVersion = "1.0"
 val ref = providers.environmentVariable("GITHUB_REF").forUseAtConfigurationTime()
 
 version = if (ref.isPresent) {
-    val tagVersion = ref.get().replace("refs/tags/", "")
-    "$tagVersion-SNAPSHOT"
+    ref.get().replace("refs/tags/", "")
 } else {
     baseVersion
 }
@@ -17,23 +16,22 @@ version = if (ref.isPresent) {
 group = "de.kolpa.mc"
 
 repositories {
-    jcenter()
+    mavenCentral()
     maven(url = "https://papermc.io/repo/repository/maven-public/")
 }
 
 tasks {
     processResources {
-        expand("version" to project.version)
+        expand("version" to version)
     }
     compileKotlin {
         kotlinOptions {
-            jvmTarget = "1.8"
-            useIR = true
+            jvmTarget = "16"
         }
     }
 }
 
 dependencies {
-    compileOnly("com.destroystokyo.paper:paper-api:1.16.4-R0.1-SNAPSHOT")
-    implementation("org.koin:koin-core:2.2.2")
+    compileOnly("io.papermc.paper:paper-api:1.17-R0.1-SNAPSHOT")
+    implementation("io.insert-koin:koin-core-jvm:3.1.1")
 }
