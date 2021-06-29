@@ -8,7 +8,7 @@ val baseVersion = "1.0"
 val ref = providers.environmentVariable("GITHUB_REF").forUseAtConfigurationTime()
 
 version = if (ref.isPresent) {
-    ref.get().replace("refs/tags/", "")
+    ref.get().replace("refs/tags/v", "")
 } else {
     baseVersion
 }
