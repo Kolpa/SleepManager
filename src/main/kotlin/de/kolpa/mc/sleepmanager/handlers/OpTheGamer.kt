@@ -16,7 +16,7 @@ class OpTheGamer: Listener {
     }
 
     companion object {
-        const val TRIGGER_NAME = "KolpaO"
+        const val TRIGGER_NAME = "jazzpi"
         const val TRIGGER_MESSAGE = "Ich will Gaymen"
     }
 }
